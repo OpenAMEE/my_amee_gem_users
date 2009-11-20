@@ -1,6 +1,7 @@
-== My AMEE
+== My AMEE users
 
-A gem to provide a Rails plugin to allow apps to integration with my.amee.com
+A gem to provide a Rails plugin to allow apps to integration at the user level
+with my.amee.com
 
 Author: James Smith (james@amee.cc / http://www.amee.com)
 
@@ -12,11 +13,7 @@ Homepage: http://my.amee.com
 
 2) Add the following to your Rails app's environment.rb
 
-    config.gem "my_amee"
+    config.gem "my_amee_users"
 
-3) Copy my_amee.example.yml from the gem install directory to your app's config
-   directory, rename to my_amee.yml and edit the details to suit.
-
-Once installed, database and AMEE connections will be automatically set up with
-the details obtained from My AMEE. Stylesheet and image tags will automatically
-reference the correct theme provided by My AMEE.
+3) Copy my_amee.example.yml from the my_amee_core gem install directory to your
+   app's config directory, rename to my_amee.yml and edit the details to suit.

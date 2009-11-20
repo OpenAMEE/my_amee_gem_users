@@ -19,7 +19,7 @@ module MyAmee
     def self.find(login)
       user = nil
       # Load appstore config from YAML
-      config = Config.appstore_config
+      config = MyAmee::Config.get
       if config
         # Generate user URL
         url = URI.parse("#{config['url']}/users/#{login}.json")
