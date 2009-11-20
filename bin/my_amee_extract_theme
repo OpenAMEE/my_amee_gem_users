@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+if File.exists?("public") && File.exists?("public/images") && File.exists?("public/stylesheets")
+  `tar czvf theme.tgz --directory=public images stylesheets --exclude=.svn`
+  puts "Created theme.tgz"
+else
+  puts "Run this command from the root directory of your Rails app"
+end
