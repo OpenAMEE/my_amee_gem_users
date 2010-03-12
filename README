@@ -17,3 +17,8 @@ Homepage: http://my.amee.com
 
 3) Copy my_amee.example.yml from the my_amee_core gem install directory to your
    app's config directory, rename to my_amee.yml and edit the details to suit.
+
+== DEVELOPER MODE
+
+If you want to avoid having to set up SSO against a remote MyAMEE instance, you 
+can set "autologin: true" and "autoadmin: true" in your my_amee.yml file.

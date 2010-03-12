@@ -1,0 +1,3 @@
+module MyAmee
+  
+end

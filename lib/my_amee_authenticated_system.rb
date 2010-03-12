@@ -105,6 +105,22 @@ module MyAmeeAuthenticatedSystem
 
     # Called from #current_user.  First attempt to login by the user login stored in the session.
     def login_from_session
+      if Rails.env.development?
+        config = MyAmee::Config.get
+        if config && config['autologin'] == true
+          options = {
+              'organisation' => 'auto',
+              'display_name' => 'autologin',
+              'roles' => [],
+              'name' => 'autologin',
+              'login' => 'autologin',
+              'url' => "#{config['url']}/users/autologin"
+          }
+          options['roles'] << 'admin' if config['autoadmin'] == true
+          self.current_user = MyAmee::User.new(options)
+          return self.current_user
+        end
+      end
       self.current_user = MyAmee::User.find(session[:user_login]) if session[:user_login]
     end
 
