@@ -9,11 +9,7 @@ module MyAmeeHelper
   end
 
   def preferences_url
-    if current_user
-      "#{$my_amee_config['url']}/users/#{current_user.login}/edit"
-    else
-      login_url
-    end
+    "#{$my_amee_config['url']}/preferences"
   end
 
 end
