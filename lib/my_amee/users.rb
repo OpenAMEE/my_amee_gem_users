@@ -16,6 +16,14 @@ module MyAmee
       roles.include? 'admin'
     end
 
+    def is_audit?
+      roles.include? 'audit'
+    end
+
+    def is_oem?
+      !is_audit?
+    end
+
     def self.find(login)
       user = nil
       # Load appstore config from YAML
