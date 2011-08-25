@@ -1,4 +1,6 @@
 require 'my_amee/config'
+require 'curb'
+require 'active_support/core_ext'
 
 module MyAmee
   class User
@@ -30,14 +32,10 @@ module MyAmee
       config = MyAmee::Config.get
       if config
         # Generate user URL
-        url = URI.parse("#{config['url']}/users/#{login}.json")
-        http = Net::HTTP.new(url.host, url.port)
-        http.start do
-          get = Net::HTTP::Get.new(url.path)
-          response = http.request(get)
-          if response.code == '200'
-            user = User.new(JSON.parse(response.body))
-          end
+        url = "#{config['url']}/users/#{login}.json"
+        r = Curl::Easy.http_get(url)
+        if r.response_code == 200
+          user = User.new(JSON.parse(r.body_str))
         end
       end
       user
