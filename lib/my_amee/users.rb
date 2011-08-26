@@ -1,12 +1,14 @@
 require 'my_amee/config'
 require 'curb'
-require 'active_support/core_ext'
 
 module MyAmee
   class User
 
     def initialize(attributes)
-      @attributes = attributes.symbolize_keys
+      @attributes = attributes.inject({}) do |options, (key, value)|
+        options[(key.to_sym rescue key) || key] = value
+        options
+      end
     end
 
     def method_missing(symbol, *args)

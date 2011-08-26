@@ -5,7 +5,7 @@ describe MyAmee::User do
   
   it 'should access a user correctly' do
     user = MyAmee::User.find('james')
-    user.should be_present
+    user.should_not be_nil
     user.organisation.should eql "AMEE"
     user.should be_is_admin
     user.should be_is_oem

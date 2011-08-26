@@ -14,5 +14,4 @@ Gem::Specification.new do |s|
   s.add_dependency("my_amee_core", "~> 1.1")
   s.add_dependency("json")
   s.add_dependency("curb", "~> 0.7")
-  s.add_dependency("activesupport")
 end
