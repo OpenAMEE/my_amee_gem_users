@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = "my_amee_users"
   s.version = "1.4.0"
-  s.date = "2011-08-25"
+  s.date = "2011-08-26"
   s.summary = "Rails plugin to allow user integration with my.amee.com"
   s.email = "james@amee.com"
   s.homepage = "https://my.amee.com"
