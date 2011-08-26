@@ -1,5 +1,9 @@
 require 'rubygems'
 require 'spec'
+require 'yaml'
+
+RAILS_ROOT = File.dirname(__FILE__)
+RAILS_ENV = 'test'
 
 $:.unshift(File.dirname(__FILE__) + '/../lib')
 require 'my_amee'
