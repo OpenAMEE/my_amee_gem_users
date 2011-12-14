@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.files += ['lib/my_amee/users.rb']
   s.files += ['lib/my_amee_helper.rb', 'lib/my_amee_authenticated_system.rb']
   s.files += ['init.rb', 'rails/init.rb', 'lib/my_amee_users.rb']
-  s.add_dependency("my_amee_core", "~> 1.1")
+  s.add_dependency("my_amee_core", "~> 1.0")
   s.add_dependency("json")
   s.add_dependency("curb", "~> 0.7")
 end
