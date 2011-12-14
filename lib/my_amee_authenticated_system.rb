@@ -65,11 +65,11 @@ module MyAmeeAuthenticatedSystem
     end
 
     def logout_url
-      "#{$my_amee_config['url']}/logout?next=#{current_url}"
+      "#{MyAmee::Config.get['url']}/logout?next=#{current_url}"
     end
 
     def login_url
-      "#{$my_amee_config['url']}/login?next=#{current_url}"
+      "#{MyAmee::Config.get['url']}/login?next=#{current_url}"
     end
 
     # Redirect as appropriate when an access request fails.
