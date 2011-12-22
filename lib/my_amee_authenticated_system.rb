@@ -122,14 +122,15 @@ module MyAmeeAuthenticatedSystem
         end
       end
   
-      # check in the cache, 
-      if Rails
+      # check in the cache for existing session from the user
+      # otherwise create new one, and stash it
+      if defined?(Rails) && session[:user_login]
         short_id = session[:session_id][0,8]
         user_cache_key = "session_#{session[:user_login]}_#{short_id}"
         if Rails.cache.exist?(user_cache_key)
           self.current_user = Rails.cache.read(session[:user_login])
         else
-          self.current_user = MyAmee::User.find(session[:user_login]) if session[:user_login]
+          self.current_user = MyAmee::User.find(session[:user_login])
           Rails.cache.write(user_cache_key, self.current_user, :expires_in => 10.minutes)
         end
       end
