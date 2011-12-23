@@ -1,5 +1,5 @@
 require 'my_amee/config'
-require 'curb'
+require 'typhoeus'
 
 module MyAmee
   class User
@@ -39,7 +39,7 @@ module MyAmee
       if config
         # Generate user URL
         url = "#{config['url']}/users/#{login}.json"
-        r = Curl::Easy.http_get(url)
+        r = Typhoeus::Request.get(url)
         if r.response_code == 200
           user = User.new(JSON.parse(r.body_str))
         end
