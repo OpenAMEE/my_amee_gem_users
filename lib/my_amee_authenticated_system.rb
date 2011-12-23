@@ -134,6 +134,7 @@ module MyAmeeAuthenticatedSystem
           Rails.cache.write(user_cache_key, self.current_user, :expires_in => 10.minutes)
         end
       end
+      self.current_user
     end
 
 end
