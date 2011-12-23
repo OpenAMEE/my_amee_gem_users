@@ -105,36 +105,41 @@ module MyAmeeAuthenticatedSystem
 
     # Called from #current_user.  First attempt to login by the user login stored in the session.
     def login_from_session
-      if Rails.env.development?
-        config = MyAmee::Config.get
-        if config && config['autologin'] == true
-          options = {
-              'organisation' => 'auto',
-              'display_name' => 'autologin',
-              'roles' => [],
-              'name' => 'autologin',
-              'login' => 'autologin',
-              'url' => "#{config['url']}/users/autologin"
-          }
-          options['roles'] << 'admin' if config['autoadmin'] == true
-          self.current_user = MyAmee::User.new(options)
-          return self.current_user
-        end
-      end
-  
+      
+      user = Rails.env.development? ? fake_login : nil
+      
       # check in the cache for existing session from the user
       # otherwise create new one, and stash it
-      if defined?(Rails) && session[:user_login]
+      if defined?(Rails) && session[:user_login] && user.nil?
         short_id = session[:session_id][0,8]
         user_cache_key = "session_#{session[:user_login]}_#{short_id}"
         if Rails.cache.exist?(user_cache_key)
-          self.current_user = Rails.cache.read(session[:user_login])
+          user = Rails.cache.read(session[:user_login])
         else
-          self.current_user = MyAmee::User.find(session[:user_login])
-          Rails.cache.write(user_cache_key, self.current_user, :expires_in => 10.minutes)
+          user = MyAmee::User.find(session[:user_login])
+          Rails.cache.write(user_cache_key, user, :expires_in => 10.minutes)
         end
       end
-      self.current_user
+      self.current_user = user
+    end
+
+    private 
+    
+    def fake_login
+      config = MyAmee::Config.get
+      if config && config['autologin'] == true
+        options = {
+            'organisation' => 'auto',
+            'display_name' => 'autologin',
+            'roles' => [],
+            'name' => 'autologin',
+            'login' => 'autologin',
+            'url' => "#{config['url']}/users/autologin"
+        }
+        options['roles'] << 'admin' if config['autoadmin'] == true
+        user = MyAmee::User.new(options)
+      end
+      user
     end
 
 end
