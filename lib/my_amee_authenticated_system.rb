@@ -114,7 +114,7 @@ module MyAmeeAuthenticatedSystem
         short_id = session[:session_id][0,8]
         user_cache_key = "session_#{session[:user_login]}_#{short_id}"
         if Rails.cache.exist?(user_cache_key)
-          user = Rails.cache.read(session[:user_login])
+          user = Rails.cache.read(user_cache_key)
         else
           user = MyAmee::User.find(session[:user_login])
           Rails.cache.write(user_cache_key, user, :expires_in => 10.minutes)
