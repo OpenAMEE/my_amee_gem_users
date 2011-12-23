@@ -11,6 +11,10 @@ module MyAmee
       end
     end
 
+    def has_key?(symbol)
+      @attributes[symbol] ? true : false
+    end
+
     def method_missing(symbol, *args)
       return @attributes[symbol] if @attributes[symbol]
       super
