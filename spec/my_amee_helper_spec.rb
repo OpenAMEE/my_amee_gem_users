@@ -30,6 +30,11 @@ describe TestClass do
     @t.logout_url.should eql "https://my.amee.com/logout?next=%2Ffoo%2Fbar"
   end
 
+  it 'should be able to generate a signup url' do
+    @t.signup_url.should eql "https://my.amee.com/signup?next=%2Ffoo%2Fbar"
+  end
+
+
   it 'should be able to generate a preferences url' do
     @t.preferences_url.should eql "https://my.amee.com/preferences"
   end
